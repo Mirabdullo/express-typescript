@@ -36,7 +36,7 @@ class UserService {
 
 
         return {
-            ...newUser,
+            newUser,
             access_token: accessToken
         }
     }
