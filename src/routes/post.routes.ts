@@ -16,6 +16,10 @@ class PostRouter {
 
     public initializeRoutes() {
         this.router.post(`${this.path}`, this.fileUploadService.uploadSingleFile('file'), this.postController.createPostController)
+        this.router.get(`${this.path}`, this.postController.getPosts)
+        this.router.get(`${this.path}/:id`, this.postController.getPostsById)
+        this.router.put(`${this.path}/:id`, this.fileUploadService.uploadSingleFile('file'), this.postController.updatePost)
+        this.router.delete(`${this.path}/:id`, this.postController.deletePost)
     }
 }
 
