@@ -1,12 +1,6 @@
-import express, { Express, Request, Response } from "express";
-import * as dotenv from 'dotenv';
-dotenv.config();
+import App from "./app";
+import UserRouter from "./routes/user.routes";
 
-const app: Express = express();
-const port = process.env.PORT || 8080;
+const app:App = new App([new UserRouter()])
 
-
-
-app.listen(port, () => {
-    console.log(`Server is running: http://localhost:${port}`);
-});
+app.listen()
