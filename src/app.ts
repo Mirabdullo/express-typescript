@@ -4,7 +4,9 @@ import {dbConnection} from "./config/dbConnection";
 import {Routes} from "./interface/router.interface";
 import cors from "cors";
 import errorMiddleware from "./middleware/error.middleware";
-
+import swaggerUi from 'swagger-ui-express';
+import * as bodyParser from 'body-parser'
+import * as fs from 'fs'
 
 class App {
     public app: express.Application;
@@ -16,8 +18,7 @@ class App {
         this.initializeMiddleware()
         this.initializeRoutes(routes)
         this.initializeErrorHendling()
-
-
+        this.initializeSwagger()
     }
 
     public listen(){
@@ -37,6 +38,8 @@ class App {
     private initializeMiddleware() {
         this.app.use(cors())
         this.app.use(express.json())
+        this.app.use(bodyParser.urlencoded({ extended: true }));
+        this.app.use(bodyParser.json());
     }
 
     private initializeRoutes(routes: Routes[]){
@@ -47,6 +50,13 @@ class App {
 
     private initializeErrorHendling() {
         this.app.use(errorMiddleware)
+    }
+
+    private initializeSwagger(){
+        const file = fs.readFileSync(__dirname + "/swagger.json", 'utf-8')
+        const swaggerDocument = JSON.parse(file)
+        this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+        console.log("Swagger connected");
     }
 }
 

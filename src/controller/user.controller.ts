@@ -6,6 +6,15 @@ import {HttpExeption} from "../httpExeption/httpExeption";
 class UserController {
     public userService = new UserService()
 
+    /**
+   * @swagger
+   * /users:
+   *   get:
+   *     summary: Get all users
+   *     responses:
+   *       200:
+   *         description: OK
+   */
     public getUserController = async (req: Request, res: Response, next: NextFunction) =>{
         try {
             res.json(await this.userService.getUsers())

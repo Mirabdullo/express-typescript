@@ -30,12 +30,11 @@ class FileUploadService{
             if(!fs.existsSync(uploadDir)){
                 fs.mkdirSync(uploadDir)
             }
-            console.log(file);
             const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
             const fieldname = file.mimetype.split('/')[0]
-            const fileName = fieldname + '-' + uniqueSuffix + path.extname(file.originalname)
+            file.originalname = fieldname + '-' + uniqueSuffix + path.extname(file.originalname)
             
-            const filePath = path.join(uploadDir, fileName)
+            const filePath = path.join(uploadDir, file.originalname)
             const writeStream = fs.createWriteStream(filePath)
             const readable = new stream.Readable()
             readable._read = () => {}

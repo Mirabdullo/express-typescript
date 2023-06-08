@@ -13,6 +13,20 @@ class UserRouter {
     public initializeRoutes(){
         this.router.post(`${this.path}`, this.userController.createUserController)
         this.router.post(`${this.path}/login`, this.userController.loginUserController)
+        /**
+        * @swagger
+        * tags:
+        *   name: Users
+        *   description: User management
+            
+        * /users:
+        *   get:
+        *     summary: Get all users
+        *     tags: [Users]
+        *     responses:
+        *       200:
+        *         description: OK
+        */
         this.router.get(`${this.path}`, this.userController.getUserController)
         this.router.get(`${this.path}/:id`, this.userController.getUserByIdController)
         this.router.put(`${this.path}/:id`, this.userController.updateUserController)

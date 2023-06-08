@@ -90,7 +90,7 @@ class UserService {
             throw new HttpExeption(404, "This username already exists")
         }
 
-        const updateUser = await this.users.updateOne({_id: id}, {
+        await this.users.updateOne({_id: id}, {
             fullname: updateUserDto.fullname || user.fullname,
             username: updateUserDto.username || user.username,
             password: updateUserDto.password || user.password
