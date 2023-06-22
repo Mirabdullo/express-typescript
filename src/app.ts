@@ -40,6 +40,7 @@ class App {
         this.app.use(express.json())
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(bodyParser.json());
+        this.app.use(express.static(__dirname + '../../uploads'))
     }
 
     private initializeRoutes(routes: Routes[]){

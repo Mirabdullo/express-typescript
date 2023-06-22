@@ -16,6 +16,9 @@ export class PostDto {
     @IsMongoId()
     authorId: string
 
+    @IsOptional()
+    file: string
+
 }
 
 export class UpdatePostDto {

@@ -2,6 +2,9 @@ import UserService from "../service/user.service";
 import {NextFunction, Request, Response} from "express";
 import {LoginDto, userCreateDto, userUpdateDto} from "../validateDto/userDto";
 import {HttpExeption} from "../httpExeption/httpExeption";
+import XLSX from 'xlsx'
+import { MongoClient } from 'mongodb'
+import path from "path";
 
 class UserController {
     public userService = new UserService()
@@ -32,6 +35,16 @@ class UserController {
             console.log(e)
             next(new HttpExeption(e.status, e.message))
         }
+    }
+
+    public userToExel = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            
+            res.download(await this.userService.getUserTOExel())
+          } catch (error) {
+            console.error(error);
+            next(error);
+          } 
     }
 
     public loginUserController = async (req: Request, res: Response, next: NextFunction) => {

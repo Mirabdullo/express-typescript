@@ -6,4 +6,5 @@ export interface IPost extends Document {
     description: string
     image: string
     authorId: mongoose.Types.ObjectId
+    file: string
 }
